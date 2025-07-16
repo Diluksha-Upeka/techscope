@@ -2,7 +2,10 @@ from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base
 from models import Article
-from scraper import scrape_hackernews, scrape_theverge, scrape_techcrunch
+from scraper import (
+    scrape_hackernews, scrape_theverge, scrape_techcrunch, scrape_wired, scrape_ars_technica,
+    scrape_engadget, scrape_mashable, scrape_zdnet, scrape_tnw, scrape_venturebeat
+)
 from apscheduler.schedulers.background import BackgroundScheduler
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -24,6 +27,13 @@ scheduler = BackgroundScheduler()
 scheduler.add_job(scrape_hackernews, 'interval', minutes=60)
 scheduler.add_job(scrape_theverge, 'interval', minutes=60)
 scheduler.add_job(scrape_techcrunch, 'interval', minutes=60)
+scheduler.add_job(scrape_wired, 'interval', minutes=60)
+scheduler.add_job(scrape_ars_technica, 'interval', minutes=60)
+scheduler.add_job(scrape_engadget, 'interval', minutes=60)
+scheduler.add_job(scrape_mashable, 'interval', minutes=60)
+scheduler.add_job(scrape_zdnet, 'interval', minutes=60)
+scheduler.add_job(scrape_tnw, 'interval', minutes=60)
+scheduler.add_job(scrape_venturebeat, 'interval', minutes=60)
 scheduler.start()
 
 def get_db():
@@ -47,4 +57,11 @@ def scrape(db: Session = Depends(get_db)):
     scrape_hackernews()
     scrape_theverge()
     scrape_techcrunch()
+    scrape_wired()
+    scrape_ars_technica()
+    scrape_engadget()
+    scrape_mashable()
+    scrape_zdnet()
+    scrape_tnw()
+    scrape_venturebeat()
     return {"message": "Scraping done"}
