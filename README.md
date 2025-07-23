@@ -129,3 +129,10 @@ For questions, suggestions, or support, please contact the project maintainer:
 - GitHub: [Diluksha-Upeka](https://github.com/Diluksha-Upeka)
 
 ---
+
+
+cd techscope/techscope-backend
+
+.\venv\Scripts\Activate.ps1
+
+uvicorn main:app --reload --port 8000
