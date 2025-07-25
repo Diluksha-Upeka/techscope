@@ -131,8 +131,10 @@ For questions, suggestions, or support, please contact the project maintainer:
 ---
 
 
-cd techscope/techscope-backend
+cd techscope-backend
 
 .\venv\Scripts\Activate.ps1
 
 uvicorn main:app --reload --port 8000
+
+http://localhost:8000/docs
